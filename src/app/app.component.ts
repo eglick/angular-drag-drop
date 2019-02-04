@@ -1,15 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
-interface Circle {
-  index: string;
-  id: string;
-}
 
 interface Square {
   index: string;
   id: string;
-  data: HTMLElement[];
 }
 
 @Component({
@@ -20,51 +14,35 @@ interface Square {
 export class AppComponent {
   title = 'Drag and Drop Demo';
   
-  circles2: Circle[] = [];
-  circles = new Array(5).fill(null).map((el, idx) => `circ-${idx}`);
+  circles = new Array(10).fill(null).map((el, idx) => `${idx}`);
   squares: Square[] = [];
 
-  constructor() {
+  constructor(private renderer: Renderer2) {
     for (let i = 0; i < 100; i++) {
       this.squares.push({
         index: `${i}`,
-        id: `sq-${i}`,
-        data: []
+        id: `${i}`
       });
     }
-    for (let i = 0; i < 5; i++) {
-      this.circles2.push({
-        index: `${i}`,
-        id: `circle-${i}`
-      });
-    }
-    // console.log('squares: ', this.squares);
-    // console.log('squareIds: ', this.squareIds);
-    // console.log('squareData: ', this.squareData);
-    // console.log('circleIds: ', this.circleIds);
   }
 
   get squareIds() {
     return this.squares.map(sq => sq.id);
   }
 
-  get squareData() {
-    return this.squares.map(sq => sq.data);
-  }
-
   drop(event) {
-    const circleId = event.item.element.nativeElement.id;
-    const squareId = event.container.element.nativeElement.id;
+    const circleElement = event.item.element.nativeElement
+    const squareElement = event.container.element.nativeElement;
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moved', circleId, 'from index', event.previousIndex, 'to index', event.currentIndex);
+      console.log('moved', circleElement.id, 'from index', event.previousIndex, 'to index', event.currentIndex);
     } else {
-      if (!event.container.data) { return; }
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      console.log('dropped', circleId, 'into', squareId);
+      transferArrayItem(event.previousContainer.data, [], event.previousIndex, event.currentIndex);
+      this.renderer.addClass(squareElement, 'full');
+      this.renderer.removeClass(squareElement, 'empty');
+      console.log('dropped', circleElement.id, 'into', squareElement.id);
     }
-
   }
 
 }

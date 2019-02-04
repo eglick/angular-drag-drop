@@ -1,27 +1,3 @@
-<div
-  class="drop-container"
-  id="drop-container"
->
-  <div
-    *ngFor="let square of squares; index as idx"
-    id="{{square.id}}"
-    class="drop-square"
-    cdkDropList
-    [cdkDropListData]="squareData[idx]"
-    (cdkDropListDropped)="drop($event)"
-    [cdkDropListConnectedTo]="['circle-origin-list']"
-  >
-    <div *ngIf="squareData[idx][0]" class="drag-circle">
-      {{squareData[idx][0]}}
-      <br />
-      in {{square.id}}
-    </div>
-    {{square.id}}
-  </div>
-</div>
-
-
-
 
 <div
   class="drag-container"
@@ -38,7 +14,28 @@
     class="drag-circle"
     cdkDrag
   >
-    <div class="circle-origin-custom-placeholder" *cdkDragPlaceholder></div>
+    <div class="circle-origin-custom-placeholder" *cdkDragPlaceholder>
+    </div>
     {{circle}}
+  </div>
+</div>
+
+
+
+
+<div
+  class="drop-container"
+  id="drop-container"
+>
+  <div
+    *ngFor="let square of squares"
+    id="{{square.id}}"
+    class="drop-square empty"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListConnectedTo]="['circle-origin-list']"
+  >
+    <div class="circle">drop!</div>
+    {{square.id}}
   </div>
 </div>
