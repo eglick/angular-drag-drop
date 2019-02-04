@@ -36,12 +36,12 @@ export class AppComponent {
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moved', circleElement.id, 'from index', event.previousIndex, 'to index', event.currentIndex);
+      console.log('moved circle', circleElement.id, 'from index', event.previousIndex, 'to index', event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data, [], event.previousIndex, event.currentIndex);
       this.renderer.addClass(squareElement, 'full');
       this.renderer.removeClass(squareElement, 'empty');
-      console.log('dropped', circleElement.id, 'into', squareElement.id);
+      console.log('dropped circle', circleElement.id, 'into square', squareElement.id);
     }
   }
 
