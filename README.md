@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The application uses Angular CDK to dynamically create a 10x10 grid of drop zones and 10 draggable elements in a sortable list. It illustrates the use of ```cdkDropListConnectedTo```, drag preview, and custom placeholders. It also provides an example of how drag and drop between connected lists needn't involve transferring data between arrays, something left somewhat unclear in the CDK docs.
 
+![Screenshot of application](https://imgur.com/a/XU5RMJG)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
